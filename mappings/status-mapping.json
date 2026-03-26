@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://forge.openclaw.ai/schemas/github-forge-pipeline/status-mapping.json",
+  "title": "Status Field Mapping",
+  "description": "Bidirectional mapping between GitHub Issue/Project status and Forge Pipeline task status",
+  "version": "1.0.0",
+  "mappings": {
+    "github_issue_state_to_forge_status": {
+      "OPEN": {
+        "forge_status": "todo",
+        "conditions": {
+          "has_pr": "in-progress",
+          "default": "todo"
+        }
+      },
+      "CLOSED": {
+        "forge_status": "done",
+        "conditions": {
+          "stateReason": {
+            "COMPLETED": "done",
+            "NOT_PLANNED": "cancelled",
+            "DUPLICATE": "cancelled",
+            "REOPENED": "todo"
+          }
+        }
+      }
+    },
+    "github_project_status_to_forge_status": {
+      "Todo": "todo",
+      "In Progress": "in-progress",
+      "In Review": "in-progress",
+      "Done": "done",
+      "Cancelled": "cancelled",
+      "Blocked": "blocked"
+    },
+    "forge_status_to_github_state": {
+      "todo": {
+        "state": "OPEN",
+        "stateReason": null,
+        "projectStatus": "Todo",
+        "labels": []
+      },
+      "in-progress": {
+        "state": "OPEN",
+        "stateReason": null,
+        "projectStatus": "In Progress",
+        "labels": ["status: in-progress"]
+      },
+      "blocked": {
+        "state": "OPEN",
+        "stateReason": null,
+        "projectStatus": "Blocked",
+        "labels": ["status: blocked"]
+      },
+      "done": {
+        "state": "CLOSED",
+        "stateReason": "COMPLETED",
+        "projectStatus": "Done",
+        "labels": []
+      },
+      "cancelled": {
+        "state": "CLOSED",
+        "stateReason": "NOT_PLANNED",
+        "projectStatus": "Cancelled",
+        "labels": []
+      }
+    }
+  },
+  "ownership": {
+    "github_owns": ["projectStatus field in GitHub Projects V2"],
+    "forge_pipeline_owns": ["status field in Forge Pipeline"],
+    "resolution": "forge_pipeline wins for operational status; github_project_status is informational only"
+  },
+  "notes": [
+    "GitHub Issues have state (OPEN/CLOSED) and stateReason",
+    "GitHub Projects V2 have custom status fields that map more directly",
+    "Forge Pipeline status is the operational source of truth",
+    "When syncing Forge Pipeline status to GitHub, update both issue labels and project status"
+  ]
+}
