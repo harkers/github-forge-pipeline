@@ -11,8 +11,12 @@
 | Phase 3: Issue Templates | ✅ Complete | 11 templates verified working |
 | Phase 4: Project Fields & Views | ✅ Complete | 6 custom fields created |
 | Phase 5: Seed Items & Testing | ✅ Complete | Test issue created and linked to project |
-| Phase 6: Documentation & Wiki | ⏳ Pending | Optional |
-| Phase 7: Automation & CLI | ⏳ Pending | Optional |
+| Phase 6: Documentation & Wiki | ✅ Complete | 5 wiki pages created, wiki enabled |
+| Phase 7: Automation & CLI | ⏳ Optional | Not started — can be added later |
+
+## Summary
+
+**All required phases complete.** GitHub Forge Pipeline is operational.
 
 ## Phase 1: Repository & Project Setup ✅
 
@@ -73,12 +77,12 @@ Custom fields created in GitHub Projects V2:
 | Field | Type | Values/Options |
 |-------|------|----------------|
 | Status (built-in) | Single Select | Todo, In Progress, Done |
-| GFP Priority | Single Select | P0-P4 |
-| Workstream | Single Select | Forge-ProPharma, HSBC, Home, Masonic |
-| Initiative | Single Select | 23 initiatives |
-| Task ID | Text | User-entered |
-| Due Date | Date | Calendar date |
-| Next Action | Text | User-entered |
+| **GFP Priority** | Single Select | P0-P4 |
+| **Workstream** | Single Select | Forge-ProPharma, HSBC, Home, Masonic |
+| **Initiative** | Single Select | 23 initiatives |
+| **Task ID** | Text | User-entered |
+| **Due Date** | Date | Calendar date |
+| **Next Action** | Text | User-entered |
 
 Views (created manually in GitHub UI):
 - All Work
@@ -102,13 +106,30 @@ Created test issue #1:
 
 System is operational and ready for use.
 
-## Phase 6: Documentation & Wiki ⏳
+## Phase 6: Documentation & Wiki ✅
 
-Optional: Create GitHub Wiki pages for easier reference.
+Wiki pages created in `docs/wiki/`:
+
+| Page | Purpose |
+|------|---------|
+| Home.md | Overview and quick links |
+| Quick-Start.md | 5-minute getting started guide |
+| Initiatives.md | Complete initiative reference |
+| Labels.md | Label reference and usage |
+| Change-Control.md | Change request process |
+
+GitHub Wiki enabled in repository settings.
 
 ## Phase 7: Automation & CLI ⏳
 
-Optional: Build CLI tooling (`gfp`) for repeatable operations.
+**Optional.** Can be added later if needed.
+
+Proposed CLI commands:
+- `gfp init` — Initialize project
+- `gfp label create-all` — Create all labels
+- `gfp field create-all` — Create all fields
+- `gfp item new` — Create new item
+- `gfp report weekly` — Generate weekly report
 
 ---
 
@@ -120,13 +141,22 @@ https://github.com/users/harkers/projects/2
 
 ```bash
 # Create new issue with template
-gh issue create --template 01-general-work-item.yml
+gh issue create --repo harkers/github-forge-pipeline --template 01-general-work-item.yml
 
 # List issues by label
-gh issue list --label "priority:urgent"
-gh issue list --label "workstream:propharma"
+gh issue list --repo harkers/github-forge-pipeline --label "priority:urgent"
+gh issue list --repo harkers/github-forge-pipeline --label "workstream:propharma"
 
 # View project
 gh project view --owner harkers --number 2
 ```
 
+## System Status
+
+🟢 **OPERATIONAL**
+
+All required phases complete. System is ready for production use.
+
+---
+
+*Last updated: 2026-03-26*
