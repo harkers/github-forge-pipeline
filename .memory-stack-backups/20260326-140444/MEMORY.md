@@ -119,13 +119,3 @@ github-forge-pipeline/
 ---
 
 *Update this file with significant decisions, state changes, and lessons learned.*
-
-<!-- MEMORY-STACK-HARDENED:START -->
-## Memory routing
-- Use retrieval, not preload.
-- Durable facts -> `para/`
-- Daily residue -> `memory/YYYY-MM-DD.md`
-- Rules and guardrails -> `AGENTS.md`
-- Optional semantic acceleration -> QMD
-- Canonical truth stays in files.
-<!-- MEMORY-STACK-HARDENED:END -->
