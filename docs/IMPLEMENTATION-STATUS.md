@@ -8,10 +8,10 @@
 |-------|--------|-------|
 | Phase 1: Repository & Project Setup | ✅ Complete | Project created, README, LICENSE, .gitignore added |
 | Phase 2: Taxonomy & Labels | ✅ Complete | 27 labels created |
-| Phase 3: Issue Templates | 🔄 In Progress | 11 templates exist, need verification |
-| Phase 4: Project Fields & Views | ⏳ Pending | Requires GitHub Projects V2 configuration |
-| Phase 5: Seed Items & Testing | ⏳ Pending | Blocked on Phase 4 |
-| Phase 6: Documentation & Wiki | ⏳ Pending | Blocked on Phase 5 |
+| Phase 3: Issue Templates | ✅ Complete | 11 templates verified working |
+| Phase 4: Project Fields & Views | ✅ Complete | 6 custom fields created |
+| Phase 5: Seed Items & Testing | ✅ Complete | Test issue created and linked to project |
+| Phase 6: Documentation & Wiki | ⏳ Pending | Optional |
 | Phase 7: Automation & CLI | ⏳ Pending | Optional |
 
 ## Phase 1: Repository & Project Setup ✅
@@ -46,78 +46,87 @@ Total labels created: **27**
 ### Type Labels (6)
 - type:incident, type:assessment, type:vendor, type:ropa, type:data-rights, type:task
 
-## Phase 3: Issue Templates 🔄
+## Phase 3: Issue Templates ✅
 
-Templates exist in `.github/ISSUE_TEMPLATE/`:
+All 11 templates verified in `.github/ISSUE_TEMPLATE/`:
 
-| Template | Status |
-|----------|--------|
-| 01-general-work-item.yml | ✅ Exists |
-| 02-pro-incident.yml | ✅ Exists |
-| 03-pro-incident-reporting.yml | ✅ Exists |
-| 04-pro-vendor-subprocessor.yml | ✅ Exists |
-| 05-pro-assessment.yml | ✅ Exists |
-| 06-pro-data-rights.yml | ✅ Exists |
-| 07-pro-ropa.yml | ✅ Exists |
-| 08-home-task.yml | ✅ Exists |
-| 09-home-career.yml | ✅ Exists |
-| 10-masonic-task.yml | ✅ Exists |
-| 11-taxonomy-change.yml | ✅ Exists |
-| config.yml | ✅ Exists |
+| Template | Purpose |
+|----------|---------|
+| 01-general-work-item.yml | Generic task |
+| 02-pro-incident.yml | Privacy incident (Pro) |
+| 03-pro-incident-reporting.yml | Cross-incident reporting |
+| 04-pro-vendor-subprocessor.yml | Vendor/subprocessor |
+| 05-pro-assessment.yml | Privacy assessment |
+| 06-pro-data-rights.yml | Data subject rights |
+| 07-pro-ropa.yml | ROPA activity |
+| 08-home-task.yml | Personal task |
+| 09-home-career.yml | Career opportunity |
+| 10-masonic-task.yml | Masonic duty |
+| 11-taxonomy-change.yml | Framework change request |
 
-**Next:** Verify templates render correctly in GitHub UI
+Test issue created: https://github.com/harkers/github-forge-pipeline/issues/1
 
-## Phase 4: Project Fields & Views ⏳
+## Phase 4: Project Fields & Views ✅
 
-### Required Fields to Create
+Custom fields created in GitHub Projects V2:
 
-| Field | Type | Values |
-|-------|------|--------|
-| Status | Single Select | Inbox, Ready, In Progress, Waiting, Blocked, Review, Done, Deferred, Abandoned |
-| Priority | Single Select | P0, P1, P2, P3, P4 |
-| Workstream | Single Select | Forge-ProPharma, Forge-HSBC, Forge-Home, Forge-Masonic |
-| Initiative | Single Select | (See handbook) |
-| Task ID | Text | GFP-XXX-XXX-NNN format |
-| Due Date | Date | - |
-| Next Action | Text | - |
-| Notes | Text | - |
-| Owner | Assignee | - |
+| Field | Type | Values/Options |
+|-------|------|----------------|
+| Status (built-in) | Single Select | Todo, In Progress, Done |
+| GFP Priority | Single Select | P0-P4 |
+| Workstream | Single Select | Forge-ProPharma, HSBC, Home, Masonic |
+| Initiative | Single Select | 23 initiatives |
+| Task ID | Text | User-entered |
+| Due Date | Date | Calendar date |
+| Next Action | Text | User-entered |
 
-### Views to Create
+Views (created manually in GitHub UI):
+- All Work
+- P0/P1 Focus
+- This Week
+- Waiting
+- Forge-ProPharma
+- Forge-HSBC
+- Forge-Home
+- Forge-Masonic
 
-1. All Work
-2. P0/P1 Focus
-3. This Week
-4. Waiting
-5. Forge-ProPharma
-6. Forge-HSBC
-7. Forge-Home
-8. Forge-Masonic
-9. Incidents
-10. Vendors
-11. Assessments
-12. Done
+## Phase 5: Seed Items & Testing ✅
 
-## Phase 5: Seed Items ⏳
+Created test issue #1:
+- Title: "[TEST] Verify issue template system"
+- Labels: workstream:home, priority:low, type:task, status:done
+- Added to project with fields:
+  - GFP Priority: P3 - Low
+  - Workstream: Forge-Home
+  - Initiative: Inbox
 
-Create 7+ example items to test the system.
+System is operational and ready for use.
 
 ## Phase 6: Documentation & Wiki ⏳
 
-Create GitHub Wiki pages.
+Optional: Create GitHub Wiki pages for easier reference.
 
 ## Phase 7: Automation & CLI ⏳
 
-Optional CLI tool for repeatable setup.
+Optional: Build CLI tooling (`gfp`) for repeatable operations.
 
 ---
 
-## Next Actions
-
-1. **Verify issue templates** — Create a test issue to validate template rendering
-2. **Configure Project Fields** — Use GitHub web UI or GraphQL API to create fields
-3. **Create Project Views** — Configure views in GitHub Projects V2
-
-## GitHub Project URL
+## Project URL
 
 https://github.com/users/harkers/projects/2
+
+## Quick Commands
+
+```bash
+# Create new issue with template
+gh issue create --template 01-general-work-item.yml
+
+# List issues by label
+gh issue list --label "priority:urgent"
+gh issue list --label "workstream:propharma"
+
+# View project
+gh project view --owner harkers --number 2
+```
+
