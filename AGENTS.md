@@ -1,14 +1,17 @@
 # AGENTS.md — GitHub Forge Pipeline Workspace
 
-This workspace manages the **bidirectional sync between GitHub Projects V2 and Forge Pipeline**.
+This workspace manages **project management using GitHub as the system of record**.
 
 ## Purpose
 
-GitHub Forge Pipeline (GFP) synchronizes:
-- GitHub Issues ↔ Forge Pipeline Tasks
-- GitHub Pull Requests ↔ Forge Pipeline Tasks
-- GitHub Project V2 status ↔ Forge Pipeline status
-- Labels/Tags bidirectionally
+GitHub Forge Pipeline (GFP) provides a single governed planning and tracking structure for work across Forge workstreams:
+
+- **Forge-ProPharma** — Professional, privacy, compliance
+- **Forge-HSBC** — Work-specific
+- **Forge-Home** — Personal, life admin
+- **Forge-Masonic** — Masonic duties
+
+**Key principle:** GitHub Issues and Projects V2 are the master planning layer. No separate database, no sync layer, no duplicate systems.
 
 ## Workspace Structure
 
@@ -19,138 +22,130 @@ github-forge-pipeline/
 ├── USER.md                # Stakeholder context
 ├── MEMORY.md              # Long-term memory
 ├── memory/                # Daily session notes
+├── para/                  # Durable knowledge
 ├── docs/                  # Design documentation
-├── sync/                  # Sync engine specifications
-├── mappings/              # Field mapping configs
-├── state/                 # Sync state (generated)
+├── design/                # UI/UX design docs
+├── .github/ISSUE_TEMPLATE/ # GitHub issue templates
+├── mappings/              # Field mappings (status, priority, labels)
 └── references/            # External reference docs
 ```
 
-## Sync Ownership Rules
+## GitHub Project Structure
 
-### Field Ownership
+### Repository
 
-| Field | Owner | Rationale |
-|-------|-------|-----------|
-| `title` | GitHub | GitHub is canonical for content |
-| `description/notes` | GitHub | GitHub is canonical for content |
-| `status` | Forge Pipeline | Forge Pipeline is operational source |
-| `priority` | Last-modified | Both systems have equal claim |
-| `tags/labels` | Merge | Union of both sets |
-| `dueDate` | Forge Pipeline | GitHub doesn't have due dates |
-| `riskState` | Forge Pipeline | GitHub doesn't have risk state |
-| `assignees` | GitHub | GitHub manages assignment |
+- **Location:** `github.com/harkers/github-forge-pipeline`
+- **Issues:** All tracked work
+- **Projects V2:** Master project with custom fields
 
-### Conflict Resolution Order
+### Project Fields
 
-1. **Check field ownership** — If one system owns the field, that value wins
-2. **Check last-modified timestamp** — Most recent change wins
-3. **GitHub wins for content** — Default to GitHub for title/description
-4. **Manual resolution queue** — Escalate if still unresolved
+| Field | Type | Options |
+|-------|------|---------|
+| Status | Single select | inbox, triage, active, blocked, review, done, deferred, abandoned |
+| Priority | Single select | urgent, high, medium, low, scheduled |
+| Workstream | Single select | Forge-ProPharma, Forge-HSBC, Forge-Home, Forge-Masonic |
+| Initiative | Single select | Defined per workstream |
+| Task ID | Text | GFP-XXX format |
+| Due Date | Date | Target completion |
+| Risk State | Single select | on-track, at-risk, blocked |
 
-## Sync Flow
+### Labels
 
-### GitHub → Forge Pipeline
+Standard labels for filtering and categorization:
+- `workstream:propharma`, `workstream:hsbc`, `workstream:home`, `workstream:masonic`
+- `priority:urgent`, `priority:high`, `priority:medium`, `priority:low`
+- `status:inbox`, `status:triage`, `status:active`, etc.
+- `type:incident`, `type:assessment`, `type:vendor`, `type:task`
 
-1. Webhook received at `/api/github/webhook`
-2. Validate signature
-3. Parse event type
-4. Lookup sync state
-5. Apply ownership rules
-6. Update Forge Pipeline via API
-7. Update sync state
+## Issue Templates
 
-### Forge Pipeline → GitHub
+Located in `.github/ISSUE_TEMPLATE/`:
 
-1. Webhook received at `/api/forge-pipeline/webhook`
-2. Validate API key
-3. Parse event type
-4. Lookup sync state
-5. Apply ownership rules
-6. Update GitHub via GraphQL API
-7. Update sync state
+| Template | Purpose |
+|----------|---------|
+| 01-general-work-item | Generic task |
+| 02-pro-incident | Privacy incident |
+| 03-pro-incident-reporting | Incident reporting |
+| 04-pro-vendor-subprocessor | Vendor/subprocessor |
+| 05-pro-assessment | Privacy assessment |
+| 06-pro-data-rights | Data rights |
+| 07-pro-ropa | ROPA activity |
+| 08-home-task | Home task |
+| 09-home-career | Career task |
+| 10-masonic-task | Masonic task |
+| 11-taxonomy-change | Taxonomy update |
 
-## Rate Limits
+## Naming Convention
 
-- **GitHub API**: 5000 requests/hour
-- Implement exponential backoff on rate limit
-- Queue events during rate limit periods
-- Monitor `X-RateLimit-Remaining` header
+### Task IDs
 
-## Conflict Handling
+Format: `GFP-XXX` where XXX is a sequential number.
 
-When a conflict is detected:
+Examples:
+- `GFP-001` — Project setup
+- `GFP-042` — Incident: Wrong recipient email
 
-1. Log to `sync_conflicts` table
-2. Check ownership rules (which field, which system wins)
-3. If unresolved, queue for manual resolution
-4. Notify workspace via `MEMORY.md` entry
+### Issue Titles
 
-## Webhook Configuration
+Format: `[WORKSTREAM] Brief description`
 
-### GitHub Webhook
+Examples:
+- `[PRO] Incident: Customer data sent to wrong recipient`
+- `[HOME] Schedule annual dental checkup`
+- `[MASON] Respond to Lodge meeting invitation`
 
-```
-URL: {GFP_BASE_URL}/api/github/webhook
-Content-Type: application/json
-Secret: {GITHUB_WEBHOOK_SECRET}
-Events: issues, pull_request, projects_v2_item
-```
+## Workflow
 
-### Forge Pipeline Webhook
+### Status Flow
 
 ```
-URL: {GFP_BASE_URL}/api/forge-pipeline/webhook
-Content-Type: application/json
-Header: X-API-Key: {FORGE_PIPELINE_API_KEY}
-Events: task.created, task.updated, task.deleted, project.updated
+inbox → triage → active → blocked → review → done
+                    ↓
+                deferred
+                    ↓
+                abandoned
 ```
 
-## MCP Integration
+### Priority Definitions
 
-Forge Pipeline can trigger sync via MCP endpoints:
+| Priority | Definition |
+|----------|------------|
+| urgent | Must complete today |
+| high | Must complete this week |
+| medium | Should complete this fortnight |
+| low | Backlog, no deadline |
+| scheduled | Future-dated, waiting |
 
-```json
-POST /api/gfp/sync/github/{owner}/{repo}
-POST /api/gfp/sync/forge-pipeline/{projectId}
-```
+## Views
 
-## State Tracking
+Recommended project views:
 
-All sync state is tracked in `state/sync-state.json`:
+1. **All Issues** — Everything, sorted by status then priority
+2. **By Workstream** — Grouped by workstream field
+3. **Active Work** — Status = active or blocked
+4. **Urgent/High** — Priority = urgent or high
+5. **Incidents** — Label = type:incident
 
-```json
-{
-  "last_sync": "2026-03-26T10:00:00Z",
-  "github_rate_remaining": 4987,
-  "pending_conflicts": 0,
-  "sync_errors": []
-}
-```
+## Forge Pipeline Web App
 
-## Forge Pipeline Integration
-
-This workspace registers in Forge Pipeline as:
-
-- **Project ID**: `github-forge-pipeline`
-- **Source Tag**: `source:github-forge-pipeline`
-- **Sync Tasks**: Created in this workspace's project
+**Status:** On hold. The Forge Pipeline web app (previously at titan:4174) is no longer active. GitHub Projects V2 is now the sole system of record.
 
 ## Self-Improvement
 
 Use the `self-improvement` skill when:
-- Sync conflicts exceed 5% rate
-- GitHub API errors occur unexpectedly
-- Field mappings need adjustment
-- Rate limits are hit repeatedly
+- Taxonomy changes are needed
+- Labels or fields need adjustment
+- Issue templates need updates
+- Workstream definitions change
 
 ## Self-Reflection
 
 Use the `self-reflection` skill after:
-- Major sync incidents
-- Manual conflict resolutions
-- Field mapping changes
-- Architecture updates
+- Major taxonomy changes
+- Template additions/updates
+- Workflow adjustments
+- Project restructuring
 
 <!-- MEMORY-STACK-HARDENED:START -->
 ## Memory Stack Rules
