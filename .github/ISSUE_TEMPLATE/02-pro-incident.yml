@@ -1,0 +1,125 @@
+name: ProPharma / HSBC incident
+description: Raise a live privacy or confidentiality incident for Forge-ProPharma or Forge-HSBC.
+title: "[GFP-XX-INC-TBC] "
+labels: ["needs-triage", "initiative:incidents"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to create a structured item for github-forge-pipeline.
+        Final item codes should be confirmed during triage.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      description: Confirm the basics so the item lands cleanly.
+      options:
+        - label: I searched for an existing related issue first
+          required: true
+        - label: I will use the approved taxonomy and naming model
+          required: true
+  - type: dropdown
+    id: workstream
+    attributes:
+      label: Workstream
+      options:
+        - Forge-ProPharma
+        - Forge-HSBC
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Proposed code
+      placeholder: ex. GFP-PP-INC-TBC
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Incident severity
+      options:
+        - S1
+        - S2
+        - S3
+        - S4
+        - TBD
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+    validations:
+      required: true
+  - type: input
+    id: incident-date
+    attributes:
+      label: Date and time identified
+      placeholder: YYYY-MM-DD HH:MM and time zone if relevant
+    validations:
+      required: true
+  - type: input
+    id: reporter
+    attributes:
+      label: Reporter / source
+      placeholder: Team, individual, vendor, mailbox, or system
+    validations:
+      required: false
+  - type: input
+    id: vendor
+    attributes:
+      label: Vendor involved
+      placeholder: Leave blank if no vendor is involved
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      placeholder: Facts only. What occurred, how it was found, and what is currently known.
+    validations:
+      required: true
+  - type: textarea
+    id: data-affected
+    attributes:
+      label: Data / PHI affected
+      placeholder: Categories of data, affected individuals, and approximate volume if known.
+    validations:
+      required: true
+  - type: textarea
+    id: containment
+    attributes:
+      label: Containment and immediate actions
+      placeholder: What has already been done, by whom, and what still needs doing now?
+    validations:
+      required: true
+  - type: dropdown
+    id: notification
+    attributes:
+      label: Notification required?
+      options:
+        - Yes
+        - No
+        - TBD
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Key risks and unknowns
+      placeholder: Regulatory risk, contractual risk, operational risk, and open questions.
+    validations:
+      required: false
+  - type: textarea
+    id: references
+    attributes:
+      label: References and evidence
+      description: Include ticket numbers, email threads, logs, files, or links.
+    validations:
+      required: false

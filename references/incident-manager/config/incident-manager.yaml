@@ -1,0 +1,97 @@
+version: 1.0
+name: incident-manager
+description: >-
+  Management agent for confidentiality, privacy, and information incident analysis.
+  Extract facts, evaluate rules, assess risk and containment, identify gaps,
+  and generate ticket updates, decision trees, and requester replies.
+
+execution:
+  mode: manager_orchestrator
+  deterministic_rules_first: true
+  require_structured_fact_model: true
+
+input:
+  accepted_formats:
+    - json
+    - yaml
+    - plain_text
+  normalize_unstructured_input: true
+
+workflow:
+  - fact_extraction
+  - incident_classification
+  - information_type_classification
+  - jurisdiction_detection
+  - sensitivity_analysis
+  - containment_assessment
+  - risk_assessment
+  - regulatory_and_contractual_assessment
+  - root_cause_assessment
+  - missing_information_analysis
+  - corrective_actions
+  - preventive_actions
+  - decision_tree_generation
+  - output_generation
+
+submodules:
+  facts_extractor:
+    enabled: true
+  jurisdiction_selector:
+    enabled: true
+  rules_evaluator:
+    enabled: true
+  risk_scorer:
+    enabled: true
+  containment_assessor:
+    enabled: true
+  root_cause_assessor:
+    enabled: true
+  output_composer:
+    enabled: true
+
+rules:
+  packs:
+    - config/rules/gdpr_eu.yaml
+    - config/rules/uk_gdpr_ico.yaml
+    - config/rules/india_dpdp.yaml
+    - config/rules/confidentiality_general.yaml
+    - config/rules/client_contractual.yaml
+
+outputs:
+  required:
+    - executive_summary
+    - incident_assessment
+    - risk_assessment
+    - containment_summary
+    - root_cause_summary
+    - missing_information_register
+    - corrective_and_preventive_actions
+    - decision_tree
+    - ticket_update_statement
+    - requester_reply
+
+confidence:
+  required_on:
+    - classification
+    - containment
+    - risk
+    - regulatory_position
+    - root_cause
+  levels:
+    - High
+    - Medium
+    - Low
+
+self_learning:
+  enabled: true
+  mode: proposal_only
+  production_self_modification: false
+  requires_human_approval: true
+  regression_tests_required: true
+
+logging:
+  save_fact_model: true
+  save_rules_output: true
+  save_drafts: true
+  save_final_outputs: true
+  save_learning_deltas: true

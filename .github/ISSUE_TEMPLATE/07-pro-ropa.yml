@@ -1,0 +1,90 @@
+name: ProPharma / HSBC ROPA
+description: Track ROPA creation, updates, reviews, or retirement activity.
+title: "[GFP-XX-ROP-TBC] "
+labels: ["needs-triage", "initiative:ropa"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to create a structured item for github-forge-pipeline.
+        Final item codes should be confirmed during triage.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      description: Confirm the basics so the item lands cleanly.
+      options:
+        - label: I searched for an existing related issue first
+          required: true
+        - label: I will use the approved taxonomy and naming model
+          required: true
+  - type: dropdown
+    id: workstream
+    attributes:
+      label: Workstream
+      options:
+        - Forge-ProPharma
+        - Forge-HSBC
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Proposed code
+      placeholder: ex. GFP-HB-ROP-TBC
+    validations:
+      required: true
+  - type: dropdown
+    id: change-type
+    attributes:
+      label: Change type
+      options:
+        - New processing activity
+        - Update existing record
+        - Retire obsolete record
+        - Annual / periodic review
+        - Control or metadata correction
+    validations:
+      required: true
+  - type: input
+    id: process-name
+    attributes:
+      label: Process / activity name
+      placeholder: Name of the processing activity or service
+    validations:
+      required: true
+  - type: input
+    id: business-owner
+    attributes:
+      label: Business owner
+      placeholder: Team or process owner
+    validations:
+      required: false
+  - type: textarea
+    id: change-summary
+    attributes:
+      label: What has changed?
+      placeholder: Explain the new or changed processing clearly.
+    validations:
+      required: true
+  - type: textarea
+    id: data-scope
+    attributes:
+      label: Data scope
+      placeholder: Data subjects, PHI / data categories, recipients, locations, and transfer context.
+    validations:
+      required: true
+  - type: textarea
+    id: actions
+    attributes:
+      label: Required ROPA actions
+      placeholder: Create, amend, validate, retire, or cross-check supporting artefacts.
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      placeholder: Existing ROPA IDs, assessments, policies, designs, or related issues.
+    validations:
+      required: false

@@ -1,0 +1,96 @@
+name: Home career opportunity
+description: Track recruiter outreach, CV actions, interview prep, offers, or follow-up activity under Forge-Home-Career.
+title: "[GFP-HM-CAR-TBC] "
+labels: ["needs-triage", "workstream:home", "initiative:career"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to create a structured item for github-forge-pipeline.
+        Final item codes should be confirmed during triage.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      description: Confirm the basics so the item lands cleanly.
+      options:
+        - label: I searched for an existing related issue first
+          required: true
+        - label: I will use the approved taxonomy and naming model
+          required: true
+  - type: input
+    id: code
+    attributes:
+      label: Proposed code
+      placeholder: ex. GFP-HM-CAR-TBC
+    validations:
+      required: true
+  - type: dropdown
+    id: item-type
+    attributes:
+      label: Career item type
+      options:
+        - Recruiter outreach
+        - CV tailoring
+        - Application
+        - Interview preparation
+        - Interview follow-up
+        - Offer review
+        - Compliance / onboarding action
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: company
+    attributes:
+      label: Company / client
+      placeholder: Employer, end client, or recruiter firm
+    validations:
+      required: false
+  - type: input
+    id: contact
+    attributes:
+      label: Contact / recruiter
+      placeholder: Person or mailbox
+    validations:
+      required: false
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+        - P4
+    validations:
+      required: true
+  - type: input
+    id: deadline
+    attributes:
+      label: Deadline
+      placeholder: YYYY-MM-DD or explain timing
+    validations:
+      required: false
+  - type: textarea
+    id: summary
+    attributes:
+      label: Opportunity summary
+      placeholder: What is the role or action, and why does it matter?
+    validations:
+      required: true
+  - type: textarea
+    id: next-action
+    attributes:
+      label: Next action
+      placeholder: Send CV, respond to offer, prepare examples, complete checks, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References and links
+      placeholder: Job spec links, emails, recruiter notes, or CV versions.
+    validations:
+      required: false

@@ -1,0 +1,120 @@
+name: ProPharma / HSBC vendor or sub-processor
+description: Track vendor reviews, DPA work, transfer checks, or sub-processor list updates.
+title: "[GFP-XX-VND-TBC] "
+labels: ["needs-triage", "initiative:vendors"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to create a structured item for github-forge-pipeline.
+        Final item codes should be confirmed during triage.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      description: Confirm the basics so the item lands cleanly.
+      options:
+        - label: I searched for an existing related issue first
+          required: true
+        - label: I will use the approved taxonomy and naming model
+          required: true
+  - type: dropdown
+    id: workstream
+    attributes:
+      label: Workstream
+      options:
+        - Forge-ProPharma
+        - Forge-HSBC
+    validations:
+      required: true
+  - type: dropdown
+    id: initiative
+    attributes:
+      label: Initiative
+      options:
+        - Vendors
+        - Sub-Processor-List
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Proposed code
+      placeholder: ex. GFP-PP-VND-TBC or GFP-HB-SPL-TBC
+    validations:
+      required: true
+  - type: input
+    id: vendor-name
+    attributes:
+      label: Vendor / processor name
+      placeholder: Legal entity or trading name
+    validations:
+      required: true
+  - type: dropdown
+    id: work-type
+    attributes:
+      label: Work type
+      options:
+        - New vendor onboarding
+        - Renewal review
+        - Contract / DPA review
+        - Transfer review
+        - Security / privacy review
+        - Sub-processor list update
+        - Vendor incident follow-up
+        - Exit / termination
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: business-owner
+    attributes:
+      label: Business owner
+      placeholder: Team or person accountable on the business side
+    validations:
+      required: false
+  - type: textarea
+    id: processing-scope
+    attributes:
+      label: Processing scope
+      placeholder: What service is provided and what data / PHI is involved?
+    validations:
+      required: true
+  - type: textarea
+    id: geography
+    attributes:
+      label: Processing locations and transfers
+      placeholder: Countries where processing occurs and any onward transfers.
+    validations:
+      required: false
+  - type: dropdown
+    id: transfer-needed
+    attributes:
+      label: Transfer assessment needed?
+      options:
+        - Yes
+        - No
+        - TBD
+    validations:
+      required: true
+  - type: textarea
+    id: actions
+    attributes:
+      label: Required actions
+      placeholder: DPA updates, sub-processor entry changes, TIA, clauses, or remediation.
+    validations:
+      required: true
+  - type: input
+    id: due-date
+    attributes:
+      label: Due date
+      placeholder: YYYY-MM-DD
+    validations:
+      required: false
+  - type: textarea
+    id: references
+    attributes:
+      label: Contract references and links
+      placeholder: Contract IDs, DPAs, TIAs, procurement links, or related issues.
+    validations:
+      required: false

@@ -1,0 +1,14 @@
+{
+  "incident_id": "INC-2026-0001",
+  "reported_by": "Jane Analyst",
+  "date_reported": "2026-03-23T11:00:00Z",
+  "incident_description": "A spreadsheet containing employee contact details and a confidential client escalation summary was sent to an unintended recipient in India.",
+  "date_of_incident": "2026-03-23T10:35:00Z",
+  "systems_involved": ["Email", "SharePoint export"],
+  "data_types": ["employee contact details", "client escalation summary"],
+  "data_subjects": ["employees"],
+  "geographies": ["United Kingdom", "India"],
+  "containment_actions_taken": ["recipient contacted", "deletion requested", "mailbox recall attempted"],
+  "evidence": ["email thread", "attachment copy", "initial incident note"],
+  "additional_notes": "Awaiting confirmation of deletion and whether the attachment was opened."
+}

@@ -1,0 +1,14 @@
+{
+  "incident_id": "TEST-001",
+  "reported_by": "Case Owner",
+  "date_reported": "2026-03-23T09:00:00Z",
+  "incident_description": "An email containing client confidential information and names of two study participants was sent to the wrong external recipient.",
+  "date_of_incident": "2026-03-23T08:45:00Z",
+  "systems_involved": ["Email"],
+  "data_types": ["client confidential information", "participant names"],
+  "data_subjects": ["study participants"],
+  "geographies": ["United Kingdom", "India"],
+  "containment_actions_taken": ["recipient contacted", "deletion requested"],
+  "evidence": ["email thread"],
+  "additional_notes": "No confirmation yet whether the recipient opened the attachment."
+}

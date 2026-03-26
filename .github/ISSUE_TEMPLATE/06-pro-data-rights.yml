@@ -1,0 +1,93 @@
+name: ProPharma / HSBC data rights
+description: Track data subject rights work such as access, erasure, rectification, restriction, objection, or portability.
+title: "[GFP-XX-DRT-TBC] "
+labels: ["needs-triage", "initiative:data-rights"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to create a structured item for github-forge-pipeline.
+        Final item codes should be confirmed during triage.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      description: Confirm the basics so the item lands cleanly.
+      options:
+        - label: I searched for an existing related issue first
+          required: true
+        - label: I will use the approved taxonomy and naming model
+          required: true
+  - type: dropdown
+    id: workstream
+    attributes:
+      label: Workstream
+      options:
+        - Forge-ProPharma
+        - Forge-HSBC
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Proposed code
+      placeholder: ex. GFP-PP-DRT-TBC
+    validations:
+      required: true
+  - type: dropdown
+    id: request-type
+    attributes:
+      label: Request type
+      options:
+        - Access
+        - Erasure
+        - Rectification
+        - Restriction
+        - Objection
+        - Portability
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: received-date
+    attributes:
+      label: Date received
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: input
+    id: deadline
+    attributes:
+      label: Response deadline
+      placeholder: YYYY-MM-DD
+    validations:
+      required: false
+  - type: input
+    id: requester
+    attributes:
+      label: Requester reference
+      description: Use a safe internal reference; do not over-share personal details in the issue body.
+      placeholder: Internal case ID or redacted identifier
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope of request
+      placeholder: What was requested and which business areas or systems are likely in scope?
+    validations:
+      required: true
+  - type: textarea
+    id: actions
+    attributes:
+      label: Required actions
+      placeholder: Search, validation, legal review, redaction, response drafting, or system updates.
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References and linked records
+      placeholder: Mailbox references, ticket numbers, linked cases, or system notes.
+    validations:
+      required: false

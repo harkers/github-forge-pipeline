@@ -1,0 +1,96 @@
+name: ProPharma / HSBC assessment
+description: Track legislation assessments, LIAs, PIAs or TIAs.
+title: "[GFP-XX-ASM-TBC] "
+labels: ["needs-triage", "initiative:assessments"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to create a structured item for github-forge-pipeline.
+        Final item codes should be confirmed during triage.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      description: Confirm the basics so the item lands cleanly.
+      options:
+        - label: I searched for an existing related issue first
+          required: true
+        - label: I will use the approved taxonomy and naming model
+          required: true
+  - type: dropdown
+    id: workstream
+    attributes:
+      label: Workstream
+      options:
+        - Forge-ProPharma
+        - Forge-HSBC
+    validations:
+      required: true
+  - type: dropdown
+    id: assessment-type
+    attributes:
+      label: Assessment type
+      options:
+        - Legislation assessment
+        - Legitimate interest assessment
+        - Privacy impact assessment
+        - Transfer impact assessment
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Proposed code
+      placeholder: ex. GFP-PP-LIA-TBC or GFP-HB-TIA-TBC
+    validations:
+      required: true
+  - type: input
+    id: subject
+    attributes:
+      label: Subject of assessment
+      placeholder: Process, system, vendor, feature, transfer, or legal change
+    validations:
+      required: true
+  - type: input
+    id: business-owner
+    attributes:
+      label: Business owner / sponsor
+      placeholder: Team or person asking for the assessment
+    validations:
+      required: false
+  - type: textarea
+    id: trigger
+    attributes:
+      label: Trigger or change
+      placeholder: What has changed or why is the assessment needed now?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      placeholder: What activities, data, systems, vendors, countries, or risks are in scope?
+    validations:
+      required: true
+  - type: textarea
+    id: key-risks
+    attributes:
+      label: Key risks or concerns
+      placeholder: Highlight material privacy, transfer, legal, or control concerns.
+    validations:
+      required: false
+  - type: input
+    id: due-date
+    attributes:
+      label: Due date
+      placeholder: YYYY-MM-DD
+    validations:
+      required: false
+  - type: textarea
+    id: references
+    attributes:
+      label: Supporting references
+      placeholder: Prior assessments, contracts, policies, design docs, or external legal sources.
+    validations:
+      required: false

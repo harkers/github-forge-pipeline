@@ -1,0 +1,89 @@
+name: General work item
+description: Capture a standard item for any workstream when a specialist form is not needed.
+title: "[GFP-XX-XXX-TBC] "
+labels: ["needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to create a structured item for github-forge-pipeline.
+        Final item codes should be confirmed during triage.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      description: Confirm the basics so the item lands cleanly.
+      options:
+        - label: I searched for an existing related issue first
+          required: true
+        - label: I will use the approved taxonomy and naming model
+          required: true
+  - type: dropdown
+    id: workstream
+    attributes:
+      label: Workstream
+      description: Choose the primary workstream.
+      options:
+        - Forge-ProPharma
+        - Forge-HSBC
+        - Forge-Home
+        - Forge-Masonic
+    validations:
+      required: true
+  - type: input
+    id: proposed-initiative
+    attributes:
+      label: Proposed initiative
+      description: Use the canonical initiative name where known.
+      placeholder: ex. Forge-ProPharma-Vendors
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Proposed code
+      description: Use TBC if the final code will be assigned at triage.
+      placeholder: ex. GFP-PP-VND-TBC
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+        - P4
+    validations:
+      required: true
+  - type: input
+    id: due-date
+    attributes:
+      label: Due date or external deadline
+      placeholder: YYYY-MM-DD or explain the deadline
+    validations:
+      required: false
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: State the work clearly in one place.
+      placeholder: What needs doing, why it matters, and what good looks like.
+    validations:
+      required: true
+  - type: textarea
+    id: next-action
+    attributes:
+      label: Next action
+      placeholder: What should happen first?
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References and links
+      description: Paste any URLs, emails, ticket references, or file paths.
+    validations:
+      required: false

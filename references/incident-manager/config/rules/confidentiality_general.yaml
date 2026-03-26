@@ -1,0 +1,42 @@
+version: 1.0
+jurisdiction: CONFIDENTIALITY_GENERAL
+scope:
+  all_of:
+    - field: confidential_data_involved
+      equals: true
+
+legal_notes:
+  - Used where confidentiality risk exists with or without personal data.
+  - Contractual, reputational, client, and sector obligations may apply even where privacy law does not.
+
+decision_tree:
+  - id: conf_1
+    question: Was confidential information disclosed or accessed by an unauthorised party?
+    if_yes: conf_2
+    if_no: log_internal_issue
+    if_unknown: gather_missing_info
+
+  - id: conf_2
+    question: Is the information client-owned, contract-protected, regulated, or commercially sensitive?
+    if_yes: conf_3
+    if_no: conf_4
+    if_unknown: gather_missing_info
+
+  - id: conf_3
+    output:
+      confidentiality_risk: high
+      client_notification_check: likely
+      legal_review: recommended
+
+  - id: conf_4
+    question: Is there evidence of access, download, onward disclosure, or retention?
+    if_yes: elevate_severity
+    if_no: seek_containment_confirmation
+    if_unknown: gather_missing_info
+
+mandatory_missing_info:
+  - recipient_authorised
+  - evidence_of_access
+  - containment_status
+  - client_contract_applies
+  - regulated_sector_data

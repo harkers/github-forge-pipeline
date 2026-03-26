@@ -1,0 +1,78 @@
+name: Taxonomy or governance change
+description: Propose a controlled change to the github-forge-pipeline taxonomy, fields, naming model, or views.
+title: "[GOVERNANCE] "
+labels: ["needs-triage", "governance"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to create a structured item for github-forge-pipeline.
+        Final item codes should be confirmed during triage.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      description: Confirm the basics so the item lands cleanly.
+      options:
+        - label: I searched for an existing related issue first
+          required: true
+        - label: I will use the approved taxonomy and naming model
+          required: true
+  - type: dropdown
+    id: change-type
+    attributes:
+      label: Change type
+      options:
+        - New initiative
+        - Rename initiative
+        - New field
+        - Change field
+        - New view
+        - Naming / numbering change
+        - Governance rule change
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: impacted-workstream
+    attributes:
+      label: Impacted workstream
+      multiple: true
+      options:
+        - Forge-ProPharma
+        - Forge-HSBC
+        - Forge-Home
+        - Forge-Masonic
+        - All workstreams
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      placeholder: Describe the exact change being proposed.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      placeholder: Why is the change needed, and what problem does it solve?
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact assessment
+      placeholder: Explain the effect on taxonomy, reporting, filtering, existing items, and future automation.
+    validations:
+      required: true
+  - type: checkboxes
+    id: controls
+    attributes:
+      label: Control checks
+      options:
+        - label: I checked that this does not duplicate an existing initiative or field
+          required: true
+        - label: I considered how this affects naming, numbering, and reporting
+          required: true

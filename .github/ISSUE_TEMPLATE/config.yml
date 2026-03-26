@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Start with the handbook
+    url: https://github.com/harkers/devforge-openclaw-skills
+    about: Read the github-forge-pipeline handbook and taxonomy before opening a new issue.

@@ -1,0 +1,79 @@
+name: Masonic task
+description: Capture a task for Forge-Masonic.
+title: "[GFP-MS-XXX-TBC] "
+labels: ["needs-triage", "workstream:masonic"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to create a structured item for github-forge-pipeline.
+        Final item codes should be confirmed during triage.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      description: Confirm the basics so the item lands cleanly.
+      options:
+        - label: I searched for an existing related issue first
+          required: true
+        - label: I will use the approved taxonomy and naming model
+          required: true
+  - type: dropdown
+    id: initiative
+    attributes:
+      label: Masonic initiative
+      options:
+        - Forge-Masonic-Inbox
+        - Forge-Masonic-Comms-AMH
+        - Forge-Masonic-Mentoring
+        - Forge-Masonic-History
+        - Forge-Masonic-Officers
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Proposed code
+      placeholder: ex. GFP-MS-CAMH-TBC
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+        - P4
+    validations:
+      required: true
+  - type: input
+    id: due-date
+    attributes:
+      label: Due date
+      placeholder: YYYY-MM-DD or event date
+    validations:
+      required: false
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      placeholder: Describe the task, objective, or deliverable.
+    validations:
+      required: true
+  - type: textarea
+    id: next-action
+    attributes:
+      label: Next action
+      placeholder: What should happen first?
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Notes and references
+      placeholder: Lodge references, source material, dates, or links.
+    validations:
+      required: false

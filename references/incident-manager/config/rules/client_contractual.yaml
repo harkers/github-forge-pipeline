@@ -1,0 +1,31 @@
+version: 1.0
+jurisdiction: CLIENT_CONTRACTUAL
+scope:
+  any_of:
+    - field: client_contract_applies
+      equals: true
+    - field: client_data_involved
+      equals: true
+
+legal_notes:
+  - Evaluate potential contractual or client-notification implications.
+  - Works alongside privacy and confidentiality packs.
+
+decision_tree:
+  - id: contract_1
+    question: Does a client agreement, NDA, DPA, or equivalent obligation apply?
+    if_yes: contract_2
+    if_no: contract_3
+    if_unknown: gather_missing_info
+
+  - id: contract_2
+    question: Does the incident involve unauthorised disclosure, access, loss, or regulated data handling failure?
+    if_yes: contract_4
+    if_no: contract_3
+    if_unknown: gather_missing_info
+
+  - id: contract_4
+    output:
+      contractual_breach_risk: medium_to_high
+      client_notification_check: likely
+      legal_review: recommended

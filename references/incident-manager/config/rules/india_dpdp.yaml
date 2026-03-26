@@ -1,0 +1,40 @@
+version: 1.0
+jurisdiction: INDIA_DPDP
+scope:
+  any_of:
+    - data_subject_locations_contains: India
+    - incident_country_contains: India
+    - processor_location_contains: India
+
+legal_notes:
+  - Assess against India's Digital Personal Data Protection framework.
+  - Effective-date handling is required because subordinate rules may commence in stages.
+
+effective_dates:
+  base_framework_reference: 2025-11-14
+  note: Check current commencement status before treating prescribed procedural requirements as live.
+
+decision_tree:
+  - id: dpdp_1
+    question: Is digital personal data involved?
+    if_yes: dpdp_2
+    if_no: confidentiality_only
+    if_unknown: gather_missing_info
+
+  - id: dpdp_2
+    question: Has a personal data breach occurred?
+    if_yes: dpdp_3
+    if_no: not_a_dpdp_breach
+    if_unknown: gather_missing_info
+
+  - id: dpdp_3
+    output:
+      board_notification: likely_required_subject_to_current_commencement
+      affected_individual_notification: likely_required_subject_to_current_commencement
+
+mandatory_missing_info:
+  - current_rule_commencement_check
+  - categories_of_data
+  - affected_people_count
+  - data_subject_locations
+  - breach_scope

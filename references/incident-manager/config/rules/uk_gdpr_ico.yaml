@@ -1,0 +1,31 @@
+version: 1.0
+jurisdiction: UK_GDPR_ICO
+scope:
+  any_of:
+    - data_subject_locations_contains: United Kingdom
+    - controller_location_contains: United Kingdom
+    - processor_location_contains: United Kingdom
+
+legal_notes:
+  - Apply UK GDPR personal data breach logic.
+  - Use ICO-oriented operational framing for 72-hour awareness timing.
+
+outputs:
+  timing:
+    regulator_clock: 72h_from_awareness
+  notification_content:
+    - nature_of_breach
+    - categories_and_approximate_numbers_of_data_subjects
+    - categories_and_approximate_numbers_of_records
+    - likely_consequences
+    - measures_taken_or_proposed
+
+risk_guidance:
+  low:
+    description: Low or negligible residual risk after containment.
+  medium:
+    description: Some plausible risk to rights and freedoms.
+  high:
+    description: Material risk or uncertainty with meaningful exposure.
+  severe:
+    description: High likelihood of significant harm or major uncontrolled exposure.

@@ -1,0 +1,57 @@
+version: 1.0
+jurisdiction: GDPR_EU
+scope:
+  any_of:
+    - data_subject_locations_contains: EU_EEA
+    - controller_location_contains: EU_EEA
+    - processor_location_contains: EU_EEA
+
+legal_notes:
+  - Personal data breach logic should align to GDPR Articles 4(12), 33, and 34.
+  - Notification thresholds must be interpreted conservatively where key facts are missing.
+
+definitions:
+  personal_data_breach:
+    all_of:
+      - field: personal_data_involved
+        equals: true
+      - field: incident_type
+        in:
+          - unauthorised_disclosure
+          - unauthorised_access
+          - loss
+          - alteration
+          - availability_issue
+
+decision_tree:
+  - id: gdpr_1
+    question: Is personal data involved?
+    if_yes: gdpr_2
+    if_no: confidentiality_only
+    if_unknown: gather_missing_info
+
+  - id: gdpr_2
+    question: Does the incident involve destruction, loss, alteration, unauthorised disclosure of, or access to personal data?
+    if_yes: gdpr_3
+    if_no: not_a_personal_data_breach
+    if_unknown: gather_missing_info
+
+  - id: gdpr_3
+    question: Is risk to rights and freedoms likely?
+    if_yes: regulator_notification_likely
+    if_no: log_and_monitor
+    if_unknown: gather_missing_info
+
+outputs:
+  regulator_notification_likely:
+    regulator_notification: likely
+    timer: 72h_from_awareness
+  log_and_monitor:
+    regulator_notification: not_currently_indicated
+
+mandatory_missing_info:
+  - affected_people_count
+  - evidence_of_access
+  - data_encrypted
+  - special_category_or_sensitive
+  - data_subject_locations

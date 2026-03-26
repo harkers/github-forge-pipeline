@@ -1,0 +1,14 @@
+{
+  "incident_id": "TEST-002",
+  "reported_by": "Project Manager",
+  "date_reported": "2026-03-23T10:00:00Z",
+  "incident_description": "A draft commercial proposal for a client was uploaded to a shared workspace accessible by an unintended external vendor.",
+  "date_of_incident": "2026-03-23T09:20:00Z",
+  "systems_involved": ["Document repository"],
+  "data_types": ["commercial proposal", "pricing assumptions"],
+  "data_subjects": [],
+  "geographies": ["United Kingdom"],
+  "containment_actions_taken": ["permissions removed"],
+  "evidence": ["access log pending"],
+  "additional_notes": "No personal data confirmed at this stage."
+}

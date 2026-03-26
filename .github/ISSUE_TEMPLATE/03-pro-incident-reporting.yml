@@ -1,0 +1,97 @@
+name: ProPharma / HSBC incident reporting
+description: Track trend analysis, metrics packs, oversight reporting, or lessons learned for incidents.
+title: "[GFP-XX-IRP-TBC] "
+labels: ["needs-triage", "initiative:incident-reporting"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to create a structured item for github-forge-pipeline.
+        Final item codes should be confirmed during triage.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      description: Confirm the basics so the item lands cleanly.
+      options:
+        - label: I searched for an existing related issue first
+          required: true
+        - label: I will use the approved taxonomy and naming model
+          required: true
+  - type: dropdown
+    id: workstream
+    attributes:
+      label: Workstream
+      options:
+        - Forge-ProPharma
+        - Forge-HSBC
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Proposed code
+      placeholder: ex. GFP-HB-IRP-TBC
+    validations:
+      required: true
+  - type: dropdown
+    id: report-type
+    attributes:
+      label: Reporting item type
+      options:
+        - Monthly metrics pack
+        - Quarterly trend report
+        - Root cause analysis review
+        - Leadership / board reporting
+        - Audit evidence pack
+        - Lessons learned
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      options:
+        - P0
+        - P1
+        - P2
+        - P3
+        - P4
+    validations:
+      required: true
+  - type: input
+    id: reporting-period
+    attributes:
+      label: Reporting period
+      placeholder: ex. March 2026 or Q2 2026
+    validations:
+      required: false
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and purpose
+      placeholder: What needs to be reported, for whom, and why?
+    validations:
+      required: true
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Required metrics / outputs
+      placeholder: Counts, trends, severity breakdowns, vendor incidents, recurring causes, etc.
+    validations:
+      required: true
+  - type: input
+    id: due-date
+    attributes:
+      label: Due date
+      placeholder: YYYY-MM-DD
+    validations:
+      required: false
+  - type: textarea
+    id: references
+    attributes:
+      label: Inputs and source references
+      placeholder: Existing incident issues, spreadsheets, dashboards, decks, or evidence sources.
+    validations:
+      required: false
